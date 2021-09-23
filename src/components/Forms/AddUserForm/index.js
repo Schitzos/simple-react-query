@@ -3,12 +3,30 @@ import {
   Button,
   TextField,
 } from "@material-ui/core";
+import { useEffect } from "react";
 
-export function AddUserForm({ handleSubmitForm, isLoading }) {
-  const { handleSubmit, control } = useForm();
+export function AddUserForm({ handleSubmitForm, hanldeEditForm, isLoading, isFetching, mode, data }) {
+  const { handleSubmit, control, setValue } = useForm();
+
+  const handleSubmitMode = (value) => {
+    if (mode === 'add') {
+      handleSubmitForm(value)
+    } else {
+      hanldeEditForm(value)
+    }
+  }
+
+  useEffect(() => {
+    if (mode === 'edit' && !isFetching && data) {
+      setValue('firstName', data.firstName)
+      setValue('lastName', data.lastName)
+      setValue('email', data.email)
+      setValue('id', data.id)
+    }
+  }, [data, isFetching, setValue, mode]);
 
   return (
-    <form onSubmit={handleSubmit(handleSubmitForm)}>
+    <form onSubmit={handleSubmit(handleSubmitMode)}>
       <Controller
         name="firstName"
         control={control}
@@ -17,7 +35,7 @@ export function AddUserForm({ handleSubmitForm, isLoading }) {
         render={({ field, fieldState: { error } }) =>
           <TextField {...field}
             autoFocus
-            label="FisrtName"
+            label="FirstName"
             type="text"
             fullWidth
             error={!!error}
@@ -53,6 +71,7 @@ export function AddUserForm({ handleSubmitForm, isLoading }) {
             error={!!error}
             helperText={error ? error.message : null}
             margin="normal"
+            disabled={mode === 'edit' ? true : false}
           />}
       />
       <Button
@@ -60,10 +79,10 @@ export function AddUserForm({ handleSubmitForm, isLoading }) {
         fullWidth
         variant="contained"
         color="secondary"
-        disabled={isLoading}
+        disabled={isLoading || isFetching}
         sx={{ mt: 3, mb: 2 }}
       >
-        Add User
+        {mode === 'add' ? 'Add' : 'Edit'} User
       </Button>
       {isLoading && 'loading'}
     </form>

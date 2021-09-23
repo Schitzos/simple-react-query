@@ -35,7 +35,6 @@ const Home = () => {
     fetchLogin.mutate(value);
   }
 
-
   const flexStyle = { display: 'flex', flexDirection: 'column' }
 
   return (

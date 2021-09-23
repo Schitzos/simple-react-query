@@ -45,7 +45,7 @@ export function LoginForm({ handleLogin, isLoading }) {
         fullWidth
         variant="contained"
         color="secondary"
-        // disabled={isLoading}
+        disabled={isLoading}
         sx={{ mt: 3, mb: 2 }}
       >
         Sign In

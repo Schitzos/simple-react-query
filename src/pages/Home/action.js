@@ -26,3 +26,41 @@ export const addUser = async (body) => {
   const { data } = await axios(options);
   return data;
 }
+
+export const editUser = async (body) => {
+  const options = {
+    url: `${process.env.REACT_APP_BASE_URL}user/${body.id}`,
+    method: 'PUT',
+    data: body,
+    headers: {
+      'app-id': process.env.REACT_APP_DUMMY_API_KEY,
+    },
+    body: body
+  };
+  const { data } = await axios(options);
+  return data;
+}
+
+export const detailUser = async (id) => {
+  const options = {
+    url: `${process.env.REACT_APP_BASE_URL}user/${id}`,
+    method: 'GET',
+    headers: {
+      'app-id': process.env.REACT_APP_DUMMY_API_KEY,
+    },
+  };
+  const { data } = await axios(options);
+  return data;
+}
+
+export const deleteUser = async (id) => {
+  const options = {
+    url: `${process.env.REACT_APP_BASE_URL}user/${id}`,
+    method: 'DELETE',
+    headers: {
+      'app-id': process.env.REACT_APP_DUMMY_API_KEY,
+    },
+  };
+  const { data } = await axios(options);
+  return data;
+}

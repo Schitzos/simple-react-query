@@ -1,4 +1,4 @@
-import { AppBar, Toolbar, Typography, IconButton, Menu } from '@mui/material';
+import { AppBar, Toolbar, Typography, IconButton, Menu, Link } from '@mui/material';
 import { Box } from '@mui/system';
 import { useContext } from 'react';
 import { useHistory } from 'react-router';
@@ -30,7 +30,9 @@ const Header = () => {
         <AppBar position="static">
           <Toolbar>
             <Typography variant="h6" sx={{ flexGrow: 1, cursor: 'pointer' }}>
-              Learn React Query
+              <Link href="/" sx={{ color: 'white' }} underline="none">
+                Simple React Query
+              </Link>
             </Typography>
             <Toolbar
               sx={{ display: { sm: 'flex', xs: 'none' } }}
